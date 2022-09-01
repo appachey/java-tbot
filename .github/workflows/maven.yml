@@ -26,6 +26,6 @@ jobs:
 
       env:
         TBOT_TOKEN: ${{ secrets.TELEGRAM_BOT_KEY }}
-        TBOT_USERNAME: ${{secrets.TBOT_USERNAME}}
+        TBOT_USERNAME: test.veryfirst_bot
 
       run: mvn -Dbot.username=$TBOT_USERNAME -Dbot.token=$TBOT_TOKEN -B package --file pom.xml
