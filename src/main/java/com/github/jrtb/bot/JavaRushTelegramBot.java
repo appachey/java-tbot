@@ -1,5 +1,6 @@
 package com.github.jrtb.bot;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -11,9 +12,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
  */
 @Component
 public class JavaRushTelegramBot extends TelegramLongPollingBot {
-    private final String username = System.getProperty("bot.username");
+    @Value("${bot.username}")
+    private String username;
 
-    private final String token = System.getProperty("bot.token");
+    @Value("${bot.token}")
+    private String token;
 
     @Override
     public String getBotToken() {
