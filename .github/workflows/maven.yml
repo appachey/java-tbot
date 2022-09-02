@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "JRTB-2" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "JRTB-2" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -24,7 +24,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       env:
-        token: ${{ secrets.token }}
+        tb_token: ${{ secrets.token }}
+        tb_username: 'test.veryfirst-bot'
       run: |
-        echo ${{ env.token }}
-        mvn -Dbot.username="username" -Dbot.token=${{ env.token }} -B package --file pom.xml
+        echo ${{ env.tb_token }}
+        echo ${{ env.tb_username }}
+        mvn -Dbot.username=$tb_username -Dbot.token=$tb_token -B package --file pom.xml
