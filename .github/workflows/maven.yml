@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "JRTB-2" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "JRTB-2" ]
 
 jobs:
   build:
