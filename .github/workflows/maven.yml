@@ -24,6 +24,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       env:
-        TB_TOKEN: token
-        TB_USERNAME: username
-      run: mvn -Dbot.username=$TB_USERNAME -Dbot.token=$TB_TOKEN -B package --file pom.xml
+        TB_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TB_USERNAME: ${{ secrets.TBOT_USERNAME }}
+      run: |
+          echo ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          mvn -Dbot.username=$TB_USERNAME -Dbot.token=$TB_TOKEN -B package --file pom.xml
