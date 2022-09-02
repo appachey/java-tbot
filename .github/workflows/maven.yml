@@ -24,7 +24,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       env:
-        token: ${{ secrets.token}}
+        token: ${{ secrets.token }}
       run: |
         echo ${{ env.token }}
         mvn -Dbot.username="username" -Dbot.token=${{ env.token }} -B package --file pom.xml
