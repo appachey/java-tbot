@@ -25,6 +25,6 @@ jobs:
     - name: Build with Maven
       env:
         tb_token: ${{ secrets.TOKEN }}
-        tb_username: 'test.veryfirst-bot'
+        tb_username: ${{ secrets.TB_USERNAME }}
       run:
         mvn -Dbot.username=$tb_username -Dbot.token=$tb_token -B package --file pom.xml
