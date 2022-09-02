@@ -23,7 +23,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      with:
+      env:
         TB_TOKEN: ${{ secrets.TELEGRAM_BOT_KEY }}
         TB_USERNAME: ${{ secrets.TBOT_USERNAME }}
       run: mvn -Dbot.username=$TB_USERNAME -Dbot.token=$TB_TOKEN -B package --file pom.xml
