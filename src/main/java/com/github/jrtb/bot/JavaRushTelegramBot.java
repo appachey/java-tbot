@@ -43,7 +43,6 @@ public class JavaRushTelegramBot extends TelegramLongPollingBot {
                 commandContainer.retrieveCommand(NO.getCommandName()).execute(update);
             }
         }
-
     }
 
     @Override
