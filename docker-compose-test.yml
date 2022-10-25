@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   jrtb-db:
-    image: mysql
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_DATABASE: 'dev_jrtb_db'

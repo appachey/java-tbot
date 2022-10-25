@@ -7,16 +7,16 @@ services:
     build:
       context: .
     environment:
-      - BOT_NAME=${BOT_NAME}
-      - BOT_TOKEN=${BOT_TOKEN}
-      - BOT_DB_USERNAME=${BOT_DB_USERNAME}
-      - BOT_DB_PASSWORD=${BOT_DB_PASSWORD}
+      BOT_NAME: ${BOT_NAME}
+      BOT_TOKEN: ${BOT_TOKEN}
+      BOT_DB_USERNAME: ${BOT_DB_USERNAME}
+      BOT_DB_PASSWORD: ${BOT_DB_PASSWORD}
     restart: always
   jrtb-db:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: 'jrtb-db'
+      MYSQL_DATABASE: 'jrtb_db'
       MYSQL_USER: ${BOT_DB_USERNAME}
       MYSQL_PASSWORD: ${BOT_DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: 'root'
