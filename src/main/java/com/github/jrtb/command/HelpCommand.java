@@ -17,8 +17,15 @@ public class HelpCommand implements Command {
                     + "<b>Почати\\завершити роботу з ботом</b>\n"
                     + "%s - почати роботу зі мною\n"
                     + "%s - призупинити роботу зі мною\n\n"
-                    + "%s - отримати допомогу по роботі зі мною\n",
-            START.getCommandName(), STOP.getCommandName(), HELP.getCommandName());
+
+                    + "Робота з підписками на групи:\n"
+                    + "%s - підписатись на групу статей\n"
+                    + "%s - отримати список груп, на які підписані\n\n"
+
+                    + "%s - отримати допомогу по роботі зі мною\n"
+                    + "%s - отримати мою статистику використання\n",
+            START.getCommandName(), STOP.getCommandName(), ADD_GROUP_SUB.getCommandName(),
+            LIST_GROUP_SUB.getCommandName(), HELP.getCommandName(), STAT.getCommandName());
 
     public HelpCommand(SendBotMessageService sendBotMessageService) {
         this.sendBotMessageService = sendBotMessageService;
@@ -26,6 +33,6 @@ public class HelpCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), HELP_MESSAGE);
+        sendBotMessageService.sendMessage(update.getMessage().getChatId(), HELP_MESSAGE);
     }
 }
