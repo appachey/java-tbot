@@ -31,7 +31,7 @@ public class ListGroupSubCommand implements Command {
         TelegramUser telegramUser = telegramUserService.findByChatId(getChatId(update))
                 .orElseThrow(NotFoundException::new);
 
-        String message = "Я нешел все подписки на группы: \n\n";
+        String message = "Я нашел все подписки на группы: \n\n";
         String collectedGroups = telegramUser.getGroupSubs().stream()
                 .map(it -> "Группа: " + it.getTitle() + " , ID = " + it.getId() + " \n")
                 .collect(Collectors.joining());
