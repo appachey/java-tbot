@@ -1,5 +1,7 @@
 package com.github.jrtb.service;
 
+import java.util.List;
+
 /**
  * Service for sending messages via telegram-bot.
  */
@@ -11,4 +13,6 @@ public interface SendBotMessageService {
      * @param message provided message to be sent.
      */
     void sendMessage(Long chatId, String message);
+
+    void sendMessage(Long chatId, List<String> messages);
 }
