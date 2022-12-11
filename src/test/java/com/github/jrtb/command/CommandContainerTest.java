@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 
 import java.util.Arrays;
 
+import static java.util.Collections.singletonList;
+
 @DisplayName("Unit-level testing for CommandContainer")
 public class CommandContainerTest {
 
@@ -23,7 +25,8 @@ public class CommandContainerTest {
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
         JavaRushGroupClient groupClient = Mockito.mock(JavaRushGroupClient.class);
         GroupSubService groupSubService = Mockito.mock(GroupSubService.class);
-        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService, groupClient, groupSubService);
+        commandContainer = new CommandContainer(sendBotMessageService, telegramUserService, groupClient, groupSubService,
+                singletonList("username"));
     }
 
     @Test
@@ -31,7 +34,7 @@ public class CommandContainerTest {
         //when-then
         Arrays.stream(CommandName.values())
                 .forEach(commandName -> {
-                    Command command = commandContainer.retrieveCommand(commandName.getCommandName());
+                    Command command = commandContainer.retrieveCommand(commandName.getCommandName(), "username");
                     Assertions.assertNotEquals(UnknownCommand.class, command.getClass());
                 });
     }
@@ -42,7 +45,7 @@ public class CommandContainerTest {
         String unknownCommand = "/flkjhdkfjhgdfvdbf";
 
         //when
-        Command command = commandContainer.retrieveCommand(unknownCommand);
+        Command command = commandContainer.retrieveCommand(unknownCommand, "username");
 
         //then
         Assertions.assertEquals(UnknownCommand.class, command.getClass());
