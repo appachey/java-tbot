@@ -18,7 +18,7 @@ public interface TelegramUserService {
     void save(TelegramUser telegramUser);
 
     /**
-     * Retrieve all users {@link TelegramUser}.
+     * Find all users {@link TelegramUser}.
      *
      * @return the collection of the active {@link TelegramUser} objects.
      */
@@ -33,7 +33,7 @@ public interface TelegramUserService {
     Optional<TelegramUser> findByChatId(Long chatId);
 
     /**
-     * Retrieve all inactive {@link TelegramUser}
+     * Find all inactive {@link TelegramUser}
      *
      * @return the collection of the inactive {@link TelegramUser} objects;
      */

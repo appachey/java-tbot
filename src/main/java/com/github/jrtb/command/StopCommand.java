@@ -4,6 +4,8 @@ import com.github.jrtb.service.SendBotMessageService;
 import com.github.jrtb.service.TelegramUserService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static com.github.jrtb.command.CommandUtils.getChatId;
+
 /**
  * Stop {@link Command}.
  */
@@ -21,11 +23,11 @@ public class StopCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        telegramUserService.findByChatId(update.getMessage().getChatId())
+        telegramUserService.findByChatId(getChatId(update))
                 .ifPresent(it -> {
                     it.setActive(false);
                     telegramUserService.save(it);
                 });
-        sendBotMessageService.sendMessage(update.getMessage().getChatId(), STOP_MESSAGE);
+        sendBotMessageService.sendMessage(getChatId(update), STOP_MESSAGE);
     }
 }

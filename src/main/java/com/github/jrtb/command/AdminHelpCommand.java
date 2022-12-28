@@ -1,11 +1,11 @@
 package com.github.jrtb.command;
 
-import com.github.jrtb.command.Command;
 import com.github.jrtb.service.SendBotMessageService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static com.github.jrtb.command.CommandName.STAT;
 import static java.lang.String.format;
+import static com.github.jrtb.command.CommandUtils.getChatId;
 
 /**
  * Admin Help {@link Command}
@@ -23,6 +23,6 @@ public class AdminHelpCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        sendBotMessageService.sendMessage(update.getMessage().getChatId(), ADMIN_HELP_MESSAGE);
+        sendBotMessageService.sendMessage(getChatId(update), ADMIN_HELP_MESSAGE);
     }
 }

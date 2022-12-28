@@ -4,6 +4,7 @@ import com.github.jrtb.service.SendBotMessageService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import static com.github.jrtb.command.CommandName.*;
+import static com.github.jrtb.command.CommandUtils.getChatId;
 
 /**
  * HelpCommand {@link Command}.
@@ -35,6 +36,6 @@ public class HelpCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        sendBotMessageService.sendMessage(update.getMessage().getChatId(), HELP_MESSAGE);
+        sendBotMessageService.sendMessage(getChatId(update), HELP_MESSAGE);
     }
 }

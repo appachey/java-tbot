@@ -3,6 +3,8 @@ package com.github.jrtb.command;
 import com.github.jrtb.service.SendBotMessageService;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static com.github.jrtb.command.CommandUtils.getChatId;
+
 /**
  * NoCommand {@link Command}.
  */
@@ -19,6 +21,6 @@ public class NoCommand implements Command{
 
     @Override
     public void execute(Update update) {
-        sendBotMessageService.sendMessage(update.getMessage().getChatId(), NO_MESSAGE);
+        sendBotMessageService.sendMessage(getChatId(update), NO_MESSAGE);
     }
 }
