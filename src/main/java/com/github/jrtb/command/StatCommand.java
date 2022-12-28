@@ -8,6 +8,8 @@ import com.github.jrtb.service.TelegramUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static com.github.jrtb.command.CommandUtils.getChatId;
+
 import java.util.stream.Collectors;
 
 /**
@@ -40,7 +42,7 @@ public class StatCommand implements Command {
                 .map(it -> String.format("%s (id = %s) - %s подписчиков", it.getTitle(), it.getId(), it.getActiveUserCount()))
                 .collect(Collectors.joining("\n"));
 
-        sendBotMessageService.sendMessage(update.getMessage().getChatId(), String.format(STAT_MESSAGE,
+        sendBotMessageService.sendMessage(getChatId(update), String.format(STAT_MESSAGE,
                 statisticDTO.getActiveUserCount(),
                 statisticDTO.getInactiveUserCount(),
                 statisticDTO.getAverageGroupCountByUser(),

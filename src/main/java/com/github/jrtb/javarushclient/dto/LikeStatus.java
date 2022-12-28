@@ -11,7 +11,7 @@ public enum LikeStatus {
     FAVORITE,
     SOLUTION,
     HELPFUL,
-    ARTICLE,
+    POST,
     OSCAR,
     DISLIKE,
     WRONG,

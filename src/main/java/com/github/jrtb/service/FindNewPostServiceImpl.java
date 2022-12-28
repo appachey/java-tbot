@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class FindNewArticleServiceImpl implements FindNewArticleService {
+public class FindNewPostServiceImpl implements FindNewPostService {
 
     public static final String JAVARUSH_WEB_POST_FORMAT = "https://javarush.com/groups/posts/%s";
 
@@ -21,27 +21,27 @@ public class FindNewArticleServiceImpl implements FindNewArticleService {
     private final SendBotMessageService sendMessageService;
 
     @Autowired
-    public FindNewArticleServiceImpl(GroupSubService groupSubService, JavaRushPostClient javaRushPostClient,
-                                     SendBotMessageService sendMessageService) {
+    public FindNewPostServiceImpl(GroupSubService groupSubService, JavaRushPostClient javaRushPostClient,
+                                  SendBotMessageService sendMessageService) {
         this.groupSubService = groupSubService;
         this.javaRushPostClient = javaRushPostClient;
         this.sendMessageService = sendMessageService;
     }
 
     @Override
-    public void findNewArticles() {
+    public void findNewPosts() {
         groupSubService.findAll().forEach(gSub -> {
-            List<PostInfo> newPosts = javaRushPostClient.findNewPosts(gSub.getId(), gSub.getLastArticleId());
+            List<PostInfo> newPosts = javaRushPostClient.findNewPosts(gSub.getId(), gSub.getLastPostId());
 
-            setNewLastArticleId(gSub, newPosts);
+            setNewLastPostId(gSub, newPosts);
 
-            notifySubscribersAboutNewArticles(gSub, newPosts);
+            notifySubscribersAboutNewPosts(gSub, newPosts);
         });
     }
 
-    private void notifySubscribersAboutNewArticles(GroupSub gSub, List<PostInfo> newPosts) {
+    private void notifySubscribersAboutNewPosts(GroupSub gSub, List<PostInfo> newPosts) {
         Collections.reverse(newPosts);
-        List<String> messageWithNewArticles = newPosts.stream()
+        List<String> messageWithNewPosts = newPosts.stream()
                 .map(post -> String.format("✨Вышла новая статья <b>%s</b> в группе <b>%s</b>.✨\n\n" +
                         "<b>Описание:</b> %s\n\n" +
                         "<b>Ссылка:</b> %s\n",
@@ -49,13 +49,13 @@ public class FindNewArticleServiceImpl implements FindNewArticleService {
                 .collect(Collectors.toList());
         gSub.getUsers().stream()
                 .filter(TelegramUser::isActive)
-                .forEach(it -> sendMessageService.sendMessage(it.getChatId(), messageWithNewArticles));
+                .forEach(it -> sendMessageService.sendMessage(it.getChatId(), messageWithNewPosts));
     }
 
-    private void setNewLastArticleId(GroupSub gSub, List<PostInfo> newPosts) {
+    private void setNewLastPostId(GroupSub gSub, List<PostInfo> newPosts) {
         newPosts.stream().mapToInt(PostInfo::getId).max()
                 .ifPresent(id -> {
-                    gSub.setLastArticleId(id);
+                    gSub.setLastPostId(id);
                     groupSubService.save(gSub);
                 });
     }

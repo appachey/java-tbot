@@ -22,7 +22,7 @@ public class GroupSubServiceTest {
 
     private final static Long CHAT_ID = 1234234L;
     private final static Integer GROUP_ID = 1123;
-    private final static Integer LAST_ARTICLE_ID = 310;
+    private final static Integer LAST_POST_ID = 310;
 
     @BeforeEach
     public void init() {
@@ -36,7 +36,7 @@ public class GroupSubServiceTest {
         newUser.setChatId(CHAT_ID);
 
         Mockito.when(telegramUserService.findByChatId(CHAT_ID)).thenReturn(Optional.of(newUser));
-        Mockito.when(javaRushGroupClient.findLastArticleId(GROUP_ID)).thenReturn(LAST_ARTICLE_ID);
+        Mockito.when(javaRushGroupClient.findLastPostId(GROUP_ID)).thenReturn(LAST_POST_ID);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class GroupSubServiceTest {
         GroupSub expectedGroupSub = new GroupSub();
         expectedGroupSub.setId(groupDiscussionInfo.getId());
         expectedGroupSub.setTitle(groupDiscussionInfo.getTitle());
-        expectedGroupSub.setLastArticleId(LAST_ARTICLE_ID);
+        expectedGroupSub.setLastPostId(LAST_POST_ID);
         expectedGroupSub.addUser(newUser);
 
         //when
